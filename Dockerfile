@@ -10,4 +10,4 @@ ADD https://hudson.eclipse.org/leshan/job/leshan/lastSuccessfulBuild/artifact/le
 EXPOSE 5683 5684 8080
 
 WORKDIR /opt/leshan
-CMD ["java -jar ./leshan-server-demo.jar"]
+CMD ["java", "-jar", "./leshan-server-demo.jar"]
