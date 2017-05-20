@@ -6,8 +6,15 @@ ENV LESHAN_VERSION=1.0.0-M1
 
 RUN mkdir -p /opt/leshan
 ADD https://hudson.eclipse.org/leshan/job/leshan/lastSuccessfulBuild/artifact/leshan-server-demo.jar /opt/leshan/
+ADD https://hudson.eclipse.org/leshan/job/leshan/lastSuccessfulBuild/artifact/leshan-client-demo.jar /opt/leshan/
+
+RUN apk update \
+    && apk add --no-cache -u python py-pip \
+    && pip install supervisor
+
+COPY supervisord.conf /etc/supervisord.conf
 
 EXPOSE 5683 5684 8080
 
 WORKDIR /opt/leshan
-CMD ["java", "-jar", "./leshan-server-demo.jar"]
+CMD ["supervisord", "--configuration", "/etc/supervisord.conf"]
