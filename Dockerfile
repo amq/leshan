@@ -15,6 +15,7 @@ RUN apk update \
 COPY supervisord.conf /etc/supervisord.conf
 
 EXPOSE 5683 5684 8080
+EXPOSE 5683/udp 5684/udp
 
 WORKDIR /opt/leshan
 CMD ["supervisord", "--configuration", "/etc/supervisord.conf"]
